@@ -21,15 +21,14 @@ const UserSchema = new Schema({
 });
 
 //Não é possivel usar arrow function pois há problemas de escopo com o this.
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', async function (next) {
     let user = this;
 
     if (!user.isModified('password')) return next();
 
-    bcrypt.hash(user.password, 10, (err, encrypted) => {
-        user.password = encrypted;
-        return next();
-    })
+    user.password = await bcrypt.hash(user.password, 10);
+
+    return next();
 });
 
 module.exports = mongoose.model('User', UserSchema);
