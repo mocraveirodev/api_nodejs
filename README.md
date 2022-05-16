@@ -1,2 +1,2 @@
 # api_nodejs
-Curso básico de APIs com Nodejs + Express + Mongodb
+API com Nodejs + Express + Mongodb
